@@ -1,13 +1,46 @@
-<beans xmlns="http://www.springframework.org/schema/beans"  
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-       xmlns:aop="http://www.springframework.org/schema/aop"  
-       xmlns:tx="http://www.springframework.org/schema/tx"  
-       xsi:schemaLocation="  
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="  
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"   
-    default-autowire="byName">
-    
-    <context:annotation-config/>
-	<context:component-scan base-package="net.pvp.portal"/>
-	
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName">
+
+	<bean id="dsPVP" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="user" value="root" />
+		<property name="password" value="123456" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/pvp_db" />
+		<property name="maxPoolSize" value="10" />
+		<property name="acquireIncrement" value="1" />
+		<property name="maxIdleTime" value="120" />
+		<property name="acquireRetryAttempts" value="10" />
+		<property name="initialPoolSize" value="10" />
+	</bean>
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="annotatedPackages">
+			<list>
+				<value>net.pvp.portal.dao</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dsPVP" />
+		<property name="packagesToScan">
+			<list>
+				<value>net.pvp.portal.service</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+
 </beans>  

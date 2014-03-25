@@ -19,6 +19,17 @@ ind_ativo CHAR NOT NULL,
 cod_tipo_usuario INT NOT NULL,
 FOREIGN KEY (cod_tipo_usuario) REFERENCES tipo_usuario (codigo));
 
+CREATE TABLE permissao(
+codigo INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(50) NOT NULL,
+role VARCHAR(50) NOT NULL);
+
+CREATE TABLE permissao_usuario(
+cod_tipo_usuario INT,
+cod_permissao INT,
+FOREIGN KEY (cod_tipo_usuario) REFERENCES tipo_usuario (codigo),
+FOREIGN KEY (cod_permissao) REFERENCES permissao (codigo));
+
 CREATE TABLE status(
 codigo INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(50) NOT NULL,

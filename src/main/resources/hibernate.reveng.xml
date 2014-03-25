@@ -19,92 +19,23 @@
 			length="19" not-null="true">
 		</sql-type>
 	</type-mapping>
-	<table-filter match-catalog="pvp_db" match-name="candidato" />
-	<table-filter match-catalog="pvp_db" match-name="cidade" />
-	<table-filter match-catalog="pvp_db" match-name="estado" />
-	<table-filter match-catalog="pvp_db" match-name="filiacao" />
-	<table-filter match-catalog="pvp_db" match-name="partido" />
-	<table-filter match-catalog="pvp_db" match-name="postagem" />
-	<table-filter match-catalog="pvp_db"
-		match-name="postagem_auditoria" />
-	<table-filter match-catalog="pvp_db" match-name="status" />
-	<table-filter match-catalog="pvp_db" match-name="tipo_alteracao" />
-	<table-filter match-catalog="pvp_db" match-name="tipo_cargo" />
-	<table-filter match-catalog="pvp_db" match-name="tipo_usuario" />
-	<table-filter match-catalog="pvp_db" match-name="usuario" />
-	<table catalog="pvp_db" name="usuario">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="login"></column>
-		<column name="senha"></column>
-		<column name="cpf"></column>
-		<column name="data_incricao"></column>
-		<column name="data_ultimo_acesso"></column>
-		<column name="ind_ativo"></column>
-		<column name="cod_tipo_usuario"></column>
-	</table>
-	<table catalog="pvp_db" name="filiacao">
-		<column name="codigo"></column>
-		<column name="cod_candidato"></column>
-		<column name="cod_partido"></column>
-		<column name="cod_cidade"></column>
-		<column name="ind_ativa"></column>
-	</table>
+	<table-filter match-name="permissao" match-catalog="pvp_db"></table-filter>
+	<table-filter match-name="permissao_usuario"
+		match-catalog="pvp_db">
+	</table-filter>
+	<table-filter match-name="tipo_usuario" match-catalog="pvp_db"></table-filter>
 	<table catalog="pvp_db" name="tipo_usuario">
 		<column name="codigo"></column>
 		<column name="nome"></column>
 		<column name="descricao"></column>
 	</table>
-	<table catalog="pvp_db" name="postagem_auditoria">
-		<column name="codigo"></column>
-		<column name="cod_postagem"></column>
-		<column name="cod_usuario"></column>
-		<column name="cod_tipo_alteracao"></column>
-		<column name="valor_antigo"></column>
-		<column name="valor_novo"></column>
+	<table catalog="pvp_db" name="permissao_usuario">
+		<column name="cod_tipo_usuario"></column>
+		<column name="cod_permissao"></column>
 	</table>
-	<table catalog="pvp_db" name="partido">
+	<table catalog="pvp_db" name="permissao">
 		<column name="codigo"></column>
 		<column name="nome"></column>
-		<column name="sigla"></column>
-	</table>
-	<table catalog="pvp_db" name="tipo_alteracao">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="descricao"></column>
-	</table>
-	<table catalog="pvp_db" name="status">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="descricao"></column>
-	</table>
-	<table catalog="pvp_db" name="candidato">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-	</table>
-	<table catalog="pvp_db" name="postagem">
-		<column name="codigo"></column>
-		<column name="titulo"></column>
-		<column name="descricao"></column>
-		<column name="fonte"></column>
-		<column name="cod_candidato"></column>
-		<column name="data_inclusao"></column>
-		<column name="cod_usuario"></column>
-		<column name="cod_status"></column>
-	</table>
-	<table catalog="pvp_db" name="cidade">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="cod_estado"></column>
-	</table>
-	<table catalog="pvp_db" name="tipo_cargo">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="descricao"></column>
-	</table>
-	<table catalog="pvp_db" name="estado">
-		<column name="codigo"></column>
-		<column name="nome"></column>
-		<column name="sigla"></column>
+		<column name="role"></column>
 	</table>
 </hibernate-reverse-engineering>
