@@ -1,4 +1,0 @@
-app
-===
-
-Fontes da aplicação
