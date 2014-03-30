@@ -11,10 +11,13 @@ import org.springframework.security.core.GrantedAuthority;
 
 public class Autenticador implements Authentication{
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 5992241905786512080L;
 	private final Usuario usuario;
 	private final List<Permissao> permissoes;
 	private boolean authenticated;
-
 
 	public Autenticador(final Usuario usuario, final List<Permissao> permissoes){
 		this.usuario = usuario;
