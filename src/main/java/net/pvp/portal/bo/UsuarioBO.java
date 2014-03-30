@@ -1,4 +1,4 @@
-package net.pvp.portal.servicos;
+package net.pvp.portal.bo;
 
 import javax.inject.Inject;
 
@@ -7,7 +7,7 @@ import net.pvp.portal.entidades.Usuario;
 
 import org.springframework.stereotype.Service;
 @Service("usuario")
-public class UsuarioServ {
+public class UsuarioBO {
 
 	@Inject
 	UsuarioDAO dao;

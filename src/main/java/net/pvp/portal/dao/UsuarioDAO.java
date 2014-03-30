@@ -9,6 +9,9 @@ import javax.persistence.QueryTimeoutException;
 
 import net.pvp.portal.entidades.Usuario;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class UsuarioDAO extends DAOGenerico<Usuario>{
 
 	public UsuarioDAO(){

@@ -1,4 +1,4 @@
-package net.pvp.portal.servicos;
+package net.pvp.portal.bo;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import net.pvp.portal.entidades.Usuario;
 import org.springframework.stereotype.Service;
 
 @Service("permissao")
-public class PermissaoServ {
+public class PermissaoBO {
 
 	@Inject
 	private PermissaoDAO dao;
