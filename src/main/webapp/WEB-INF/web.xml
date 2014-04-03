@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 
-  <display-name>Portal da vida política</display-name>
-  
-  	<!-- Change to "Production" when you are ready to deploy -->
+	<display-name>Portal da vida política</display-name>
+
+	<!-- Alterar para "Production" quando a aplicação estiver pronta para implantação -->
 	<context-param>
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
 
-	<!-- Welcome page -->
+	<!-- Página inicial -->
 	<welcome-file-list>
 		<welcome-file>faces/paginas/index.xhtml</welcome-file>
 	</welcome-file-list>
 
-	<!-- JSF mapping -->
+	<!-- Servlet do JSF -->
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
-	<!-- Map these files with JSF -->
+
+	<!-- Mapeamento dos arquivos com JSF -->
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
@@ -43,5 +42,34 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+
+	<!-- Filtro do Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Listener para carregar os arquivos de configuração do Spring -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/spring-data.xml
+			/WEB-INF/spring/spring-security.xml
+		</param-value>
+	</context-param>
+	
+	<!-- Referência ao recurso JNDI da conexão gerenciada pelo servidor -->
+	<resource-ref>  
+	   <res-ref-name>jdbc/pvp</res-ref-name>  
+	   <res-type>javax.sql.DataSource</res-type>  
+	   <res-auth>Container</res-auth>  
+	</resource-ref> 
 	
 </web-app>

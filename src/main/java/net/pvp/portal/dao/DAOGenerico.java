@@ -15,42 +15,42 @@ public abstract class DAOGenerico<T> {
 
 	protected Class<T> classePersistente;
 
+	@SuppressWarnings("unchecked")
 	public DAOGenerico(){
 		this.classePersistente = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 	}
-
+	
+	@PersistenceUnit
 	private EntityManagerFactory emf;
 
-	@PersistenceUnit(name = "pvpPU")
-	public void setEntityManagerFactory(final EntityManagerFactory emf){
-		this.emf = emf;
-	}
-
-	protected EntityManager getEntityManager(){
-		return this.emf.createEntityManager();
-	}
-
-
 	void inserir(final T objeto){
-		this.getEntityManager().persist(objeto);
+		this.getEmf().persist(objeto);
 	}
 
 	void excluir(final T objeto){
-		this.getEntityManager().remove(objeto);
+		this.getEmf().remove(objeto);
 	}
 
 	void atualizar(final T objeto){
-		this.getEntityManager().merge(objeto);
+		this.getEmf().merge(objeto);
 	}
 
 	public T findById(final Integer id) {
-		return this.getEntityManager().find(this.classePersistente, id);
+		return this.getEmf().find(this.classePersistente, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		final String sql = "FROM " + this.classePersistente.getSimpleName();
-		final Query query = this.getEntityManager().createQuery(sql);
+		final Query query = this.getEmf().createQuery(sql);
 		return query.getResultList();
+	}
+
+	public EntityManager getEmf() {
+		return emf.createEntityManager();
+	}
+
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 }
